@@ -1,0 +1,30 @@
+name: camera_example
+description: Demonstrates how to use the camera plugin.
+publish_to: none
+
+environment:
+  sdk: ">=2.14.0 <3.0.0"
+  flutter: ">=2.5.0"
+
+dependencies:
+  camera:
+    path: ../
+  flutter:
+    sdk: flutter
+  flutter_background_service: ^1.0.4
+  flutter_foreground_task: ^3.5.5
+  path_provider: ^2.0.0
+  permission_handler: ^9.2.0
+  system_alert_window: ^1.1.0+1
+  video_player: ^2.1.4
+
+dev_dependencies:
+  flutter_driver:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
