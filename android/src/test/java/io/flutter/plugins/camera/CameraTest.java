@@ -18,6 +18,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.content.Context;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraMetadata;
@@ -112,6 +113,7 @@ public class CameraTest {
     mockHandler = mock(Handler.class);
 
     final Activity mockActivity = mock(Activity.class);
+    final Context mockContext = mock(Context.class);
     final TextureRegistry.SurfaceTextureEntry mockFlutterTexture =
         mock(TextureRegistry.SurfaceTextureEntry.class);
     final String cameraName = "1";
@@ -127,6 +129,7 @@ public class CameraTest {
     camera =
         new Camera(
             mockActivity,
+            mockContext,
             mockFlutterTexture,
             mockCameraFeatureFactory,
             mockDartMessenger,
@@ -155,6 +158,7 @@ public class CameraTest {
   @Test
   public void shouldCreateCameraPluginAndSetAllFeatures() {
     final Activity mockActivity = mock(Activity.class);
+    final Context mockContext = mock(Context.class);
     final TextureRegistry.SurfaceTextureEntry mockFlutterTexture =
         mock(TextureRegistry.SurfaceTextureEntry.class);
     final CameraFeatureFactory mockCameraFeatureFactory = mock(CameraFeatureFactory.class);
@@ -170,6 +174,7 @@ public class CameraTest {
     Camera camera =
         new Camera(
             mockActivity,
+            mockContext,
             mockFlutterTexture,
             mockCameraFeatureFactory,
             mockDartMessenger,

@@ -360,12 +360,13 @@ final class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
                 new DartMessenger(
                         messenger, flutterSurfaceTexture.id(), new Handler(Looper.getMainLooper()));
         CameraProperties cameraProperties =
-                new CameraPropertiesImpl(cameraName, CameraUtils.getCameraManager(activity));
+                new CameraPropertiesImpl(cameraName, CameraUtils.getCameraManager(context));
         ResolutionPreset resolutionPreset = ResolutionPreset.valueOf(preset);
 
         camera =
                 new Camera(
                         activity,
+                        context,
                         flutterSurfaceTexture,
                         new CameraFeatureFactoryImpl(),
                         dartMessenger,

@@ -11,6 +11,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.content.Context;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CaptureRequest;
 import android.media.CamcorderProfile;
@@ -60,6 +61,7 @@ public class CameraTest_getRecordingProfileTest {
     mockDartMessenger = mock(DartMessenger.class);
 
     final Activity mockActivity = mock(Activity.class);
+    final Context mContext = mock(Context.class);
     final TextureRegistry.SurfaceTextureEntry mockFlutterTexture =
         mock(TextureRegistry.SurfaceTextureEntry.class);
     final ResolutionPreset resolutionPreset = ResolutionPreset.high;
@@ -68,6 +70,7 @@ public class CameraTest_getRecordingProfileTest {
     camera =
         new Camera(
             mockActivity,
+            mContext,
             mockFlutterTexture,
             mockCameraFeatureFactory,
             mockDartMessenger,
