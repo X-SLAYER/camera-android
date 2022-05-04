@@ -225,9 +225,6 @@ class Camera
             final ResolutionPreset resolutionPreset,
             final boolean enableAudio) {
 
-     /*   if (activity == null) {
-            throw new IllegalStateException("No activity available!");
-        } */
         this.activity = activity;
         this.enableAudio = enableAudio;
         this.flutterTexture = flutterTexture;
@@ -237,7 +234,7 @@ class Camera
         this.cameraFeatureFactory = cameraFeatureFactory;
         this.cameraFeatures =
                 CameraFeatures.init(
-                        cameraFeatureFactory, cameraProperties, activity, dartMessenger, resolutionPreset);
+                        cameraFeatureFactory, cameraProperties, activity, applicationContext, dartMessenger, resolutionPreset);
 
         // Create capture callback.
         captureTimeouts = new CaptureTimeoutsWrapper(3000, 3000);
@@ -335,7 +332,7 @@ class Camera
                         1);
 
         // Open the camera.
-        CameraManager cameraManager = CameraUtils.getCameraManager(activity);
+        CameraManager cameraManager = CameraUtils.getCameraManager(applicationContext);
         cameraManager.openCamera(
                 cameraProperties.getCameraName(),
                 new CameraDevice.StateCallback() {

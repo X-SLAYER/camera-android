@@ -314,11 +314,12 @@ class CameraController extends ValueNotifier<CameraValue> {
 
       value = value.copyWith(
         isInitialized: true,
-        previewSize: await _initializeCompleter.future
-            .then((CameraInitializedEvent event) => Size(
-                  event.previewWidth,
-                  event.previewHeight,
-                )),
+        previewSize: await _initializeCompleter.future.then(
+          (CameraInitializedEvent event) => Size(
+            event.previewWidth,
+            event.previewHeight,
+          ),
+        ),
         exposureMode: await _initializeCompleter.future
             .then((CameraInitializedEvent event) => event.exposureMode),
         focusMode: await _initializeCompleter.future

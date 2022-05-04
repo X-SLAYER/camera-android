@@ -144,24 +144,6 @@ class _HomePageState extends State<HomePage> {
           }),
           _buildTestButton('start', onPressed: _startForegroundTask),
           _buildTestButton('stop', onPressed: _stopForegroundTask),
-          _buildTestButton('Open popout', onPressed: () {
-            SystemAlertWindow.showSystemWindow(
-              height: 200,
-              header: header,
-              body: body,
-              footer: footer,
-              margin: SystemWindowMargin(
-                left: 8,
-                right: 8,
-                top: 100,
-                bottom: 0,
-              ),
-              gravity: SystemWindowGravity.BOTTOM,
-              notificationTitle: "Hello",
-              notificationBody: "How are you",
-              prefMode: SystemWindowPrefMode.DEFAULT,
-            );
-          }),
         ],
       ),
     );
