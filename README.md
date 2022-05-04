@@ -1,44 +1,22 @@
 # Camera Plugin
 
-[![pub package](https://img.shields.io/pub/v/camera.svg)](https://pub.dev/packages/camera)
+A modified Flutter plugin (for Android only) allowing access to the device cameras on foreground.
 
-A Flutter plugin for iOS, Android and Web allowing access to the device cameras.
-
-|                | Android | iOS      | Web                    |
-|----------------|---------|----------|------------------------|
-| **Support**    | SDK 21+ | iOS 10+* | [See `camera_web `][1] |
+|             | Android | iOS | Web |
+| ----------- | ------- | --- | --- |
+| **Support** | SDK 21+ | --  | [-- |
 
 ## Features
 
-* Display live camera preview in a widget.
-* Snapshots can be captured and saved to a file.
-* Record video.
-* Add access to the image stream from Dart.
+- works on foreground.
+- Display live camera preview in a widget.
+- Snapshots can be captured and saved to a file.
+- Record video.
+- Add access to the image stream from Dart.
 
 ## Installation
 
-First, add `camera` as a [dependency in your pubspec.yaml file](https://flutter.dev/using-packages/).
-
-### iOS
-
-\* The camera plugin compiles for any version of iOS, but its functionality
-requires iOS 10 or higher. If compiling for iOS 9, make sure to programmatically
-check the version of iOS running on the device before using any camera plugin features.
-The [device_info_plus](https://pub.dev/packages/device_info_plus) plugin, for example, can be used to check the iOS version.
-
-Add two rows to the `ios/Runner/Info.plist`:
-
-* one with the key `Privacy - Camera Usage Description` and a usage description.
-* and one with the key `Privacy - Microphone Usage Description` and a usage description.
-
-If editing `Info.plist` as text, add:
-
-```xml
-<key>NSCameraUsageDescription</key>
-<string>your usage description here</string>
-<key>NSMicrophoneUsageDescription</key>
-<string>your usage description here</string>
-```
+First, add `camera_bg` as a [dependency in your pubspec.yaml file](https://flutter.dev/using-packages/).
 
 ### Android
 
@@ -49,11 +27,6 @@ minSdkVersion 21
 ```
 
 It's important to note that the `MediaRecorder` class is not working properly on emulators, as stated in the documentation: https://developer.android.com/reference/android/media/MediaRecorder. Specifically, when recording a video with sound enabled and trying to play it back, the duration won't be correct and you will only see the first frame.
-
-### Web integration
-
-For web integration details, see the
-[`camera_web` package](https://pub.dev/packages/camera_web).
 
 ### Handling Lifecycle states
 
@@ -75,6 +48,10 @@ As of version [0.5.0](https://github.com/flutter/plugins/blob/master/packages/ca
     }
   }
 ```
+
+### Foreground Exemple
+
+Check the working exemple [here](https://github.com/X-SLAYER/camera-android/tree/main/example/lib)
 
 ### Example
 
@@ -132,7 +109,3 @@ class _CameraAppState extends State<CameraApp> {
 }
 
 ```
-
-For a more elaborate usage example see [here](https://github.com/flutter/plugins/tree/main/packages/camera/camera/example).
-
-[1]: https://pub.dev/packages/camera_web#limitations-on-the-web-platform
