@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:isolate';
 
-import 'package:camera/camera.dart';
+import 'package:camera_bg/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:system_alert_window/system_alert_window.dart';
@@ -25,7 +25,10 @@ class FirstTaskHandler extends TaskHandler {
     await _cameraController.initialize();
     await Future.delayed(const Duration(milliseconds: 500));
     _cameraController.startImageStream((img) async {
-      log("Image captures: ${img.width} x ${img.height} -- ${img.format.raw}");
+      log("Image captures: ${img.width} x ${img.height}");
+      FlutterForegroundTask.updateService(
+          notificationText:
+              "Image captures: ${img.width} x ${img.height} at ${DateTime.now()}");
     });
   }
 

@@ -5,7 +5,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:camera/camera.dart';
+import 'package:camera_bg/camera.dart';
 import 'package:camera_platform_interface/camera_platform_interface.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,6 @@ const MethodChannel _channel = MethodChannel('plugins.flutter.io/camera');
 /// Signature for a callback receiving the a camera image.
 ///
 /// This is used by [CameraController.startImageStream].
-// TODO(stuartmorgan): Fix this naming the next time there's a breaking change
 // to this package.
 // ignore: camel_case_types
 typedef onLatestImageAvailable = Function(CameraImage image);
@@ -29,7 +28,6 @@ Future<List<CameraDescription>> availableCameras() async {
   return CameraPlatform.instance.availableCameras();
 }
 
-// TODO(stuartmorgan): Remove this once the package requires 2.10, where the
 // dart:async `unawaited` accepts a nullable future.
 void _unawaited(Future<void>? future) {}
 
@@ -420,7 +418,6 @@ class CameraController extends ValueNotifier<CameraValue> {
   /// The `startImageStream` method is only available on Android and iOS (other
   /// platforms won't be supported in current setup).
   ///
-  // TODO(bmparr): Add settings for resolution and fps.
   Future<void> startImageStream(onLatestImageAvailable onAvailable) async {
     assert(defaultTargetPlatform == TargetPlatform.android ||
         defaultTargetPlatform == TargetPlatform.iOS);

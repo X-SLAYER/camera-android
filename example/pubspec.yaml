@@ -7,7 +7,7 @@ environment:
   flutter: ">=2.5.0"
 
 dependencies:
-  camera:
+  camera_bg:
     path: ../
   flutter:
     sdk: flutter

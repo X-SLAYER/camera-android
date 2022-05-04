@@ -6,7 +6,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:camera/camera.dart';
+import 'package:camera_bg/camera.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -94,7 +94,6 @@ void main() {
         }
       }
     },
-    // TODO(egarciad): Fix https://github.com/flutter/flutter/issues/93686.
     skip: true,
   );
 
@@ -149,7 +148,6 @@ void main() {
         }
       }
     },
-    // TODO(egarciad): Fix https://github.com/flutter/flutter/issues/93686.
     skip: true,
   );
 

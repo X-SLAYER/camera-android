@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:isolate';
 
-import 'package:camera/camera.dart';
+import 'package:camera_bg/camera.dart';
 import 'package:camera_example/controller.dart';
 import 'package:camera_example/first_task_handler.dart';
 import 'package:flutter/material.dart';

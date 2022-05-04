@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:camera/camera.dart';
+import 'package:camera_bg/camera.dart';
 
 class CamController {
   CamController._();
