@@ -8,9 +8,6 @@ import 'package:camera_example/first_task_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:system_alert_window/system_alert_window.dart';
-
-// The callback function should always be a top-level function.
 
 void startCallback() {
   FlutterForegroundTask.setTaskHandler(FirstTaskHandler());
@@ -61,7 +58,6 @@ class _HomePageState extends State<HomePage> {
 
   Future<bool> _startForegroundTask() async {
     // You can save data using the saveData function.
-    await initliszeSystemALert();
     await FlutterForegroundTask.saveData(key: 'customData', value: 'hello');
 
     ReceivePort? receivePort;
@@ -97,7 +93,6 @@ class _HomePageState extends State<HomePage> {
   Future<bool> _stopForegroundTask() async {
     _cameraController?.dispose();
     CamController.stopCamera();
-    SystemAlertWindow.closeSystemWindow();
     return await FlutterForegroundTask.stopService();
   }
 
@@ -111,10 +106,6 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     _receivePort?.close();
     super.dispose();
-  }
-
-  Future<void> initliszeSystemALert() async {
-    await SystemAlertWindow.requestPermissions();
   }
 
   @override

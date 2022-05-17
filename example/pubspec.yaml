@@ -11,11 +11,9 @@ dependencies:
     path: ../
   flutter:
     sdk: flutter
-  flutter_background_service: ^1.0.4
-  flutter_foreground_task: ^3.5.5
+  flutter_foreground_task: ^3.7.3
   path_provider: ^2.0.0
   permission_handler: ^9.2.0
-  system_alert_window: ^1.1.0+1
   video_player: ^2.1.4
 
 dev_dependencies:
