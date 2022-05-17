@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'dart:isolate';
 
 import 'package:camera_bg/camera.dart';
-import 'package:camera_example/controller.dart';
 import 'package:camera_example/first_task_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
@@ -92,7 +91,6 @@ class _HomePageState extends State<HomePage> {
 
   Future<bool> _stopForegroundTask() async {
     _cameraController?.dispose();
-    CamController.stopCamera();
     return await FlutterForegroundTask.stopService();
   }
 
