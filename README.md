@@ -2,7 +2,7 @@
 
 A modified Flutter plugin (for Android only) allowing access to the device cameras on foreground.
 
-# DICLAMER
+# DISCLAMER
 
 This version of the camera plugin can be crashed in some functionalities because I just edited some files to make it fit my purpose of making the Livestream method works in the foreground
 
