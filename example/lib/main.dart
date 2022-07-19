@@ -7,6 +7,24 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
+@pragma("vm:entry-point")
+void overlayMain() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Material(
+        color: Colors.transparent,
+        elevation: 0.0,
+        child: Container(
+          height: 500.0,
+          color: Colors.red,
+        ),
+      ),
+    ),
+  );
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 

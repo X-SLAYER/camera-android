@@ -24,6 +24,7 @@ dependencies:
   flutter_plugin_android_lifecycle: ^2.0.2
   quiver: ^3.0.0
 
+
 dev_dependencies:
   flutter_driver:
     sdk: flutter

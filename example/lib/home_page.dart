@@ -6,6 +6,7 @@ import 'package:camera_bg/camera.dart';
 import 'package:camera_example/first_task_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
+import 'package:flutter_overlay_window/flutter_overlay_window.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 void startCallback() {
@@ -130,6 +131,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           _buildTestButton('Request permission', onPressed: () async {
             await Permission.camera.request();
+            await FlutterOverlayWindow.requestPermission();
           }),
           _buildTestButton('start', onPressed: _startForegroundTask),
           _buildTestButton('stop', onPressed: _stopForegroundTask),

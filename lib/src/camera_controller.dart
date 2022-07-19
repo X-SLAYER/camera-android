@@ -20,6 +20,7 @@ const MethodChannel _channel = MethodChannel('plugins.flutter.io/camera');
 // to this package.
 // ignore: camel_case_types
 typedef onLatestImageAvailable = Function(CameraImage image);
+typedef OnCameraAvailable = Function(bool status);
 
 /// Completes with a list of available cameras.
 ///
@@ -256,6 +257,7 @@ class CameraController extends ValueNotifier<CameraValue> {
 
   bool _isDisposed = false;
   StreamSubscription<dynamic>? _imageStreamSubscription;
+  StreamSubscription<dynamic>? _cameraAvailibilitySubscription;
   FutureOr<bool>? _initCalled;
   StreamSubscription<DeviceOrientationChangedEvent>?
       _deviceOrientationSubscription;
@@ -450,6 +452,43 @@ class CameraController extends ValueNotifier<CameraValue> {
             CameraImage.fromPlatformData(imageData as Map<dynamic, dynamic>));
       },
     );
+  }
+
+  Future<bool> isCameraAvailable() async {
+    try {
+      return await _channel.invokeMethod<bool>('isCameraAvailable') ?? true;
+    } on PlatformException catch (e) {
+      throw CameraException(e.code, e.message);
+    }
+  }
+
+  Future<void> startAvailabilityStream(OnCameraAvailable check) async {
+    try {
+      await _channel.invokeMethod<void>('availabilityStream');
+    } on PlatformException catch (e) {
+      throw CameraException(e.code, e.message);
+    }
+    const EventChannel cameraAvailableChannel =
+        EventChannel('plugins.flutter.io/camera/cameraAvailabilityStream');
+    _cameraAvailibilitySubscription =
+        cameraAvailableChannel.receiveBroadcastStream().listen(
+      (dynamic data) {
+        check(data as bool);
+      },
+    );
+  }
+
+  Future<void> destroyCamera() async {
+    try {
+      await _channel.invokeMethod<void>('destroyCamera');
+    } on PlatformException catch (e) {
+      throw CameraException(e.code, e.message);
+    }
+  }
+
+  Future<void> stopAvailabilityStream() async {
+    await _cameraAvailibilitySubscription?.cancel();
+    _cameraAvailibilitySubscription = null;
   }
 
   /// Stop streaming images from platform camera.

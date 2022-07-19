@@ -9,6 +9,7 @@ import android.content.Context;
 import android.hardware.camera2.CameraAccessException;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,8 +41,10 @@ final class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
     private final TextureRegistry textureRegistry;
     private final MethodChannel methodChannel;
     private final EventChannel imageStreamChannel;
+    private final EventChannel cameraAvailabilityStream;
     private @Nullable
     Camera camera;
+    String formatImageGroup;
 
     MethodCallHandlerImpl(
             Activity activity,
@@ -59,6 +62,7 @@ final class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
 
         methodChannel = new MethodChannel(messenger, "plugins.flutter.io/camera");
         imageStreamChannel = new EventChannel(messenger, "plugins.flutter.io/camera/imageStream");
+        cameraAvailabilityStream = new EventChannel(messenger, "plugins.flutter.io/camera/cameraAvailabilityStream");
         methodChannel.setMethodCallHandler(this);
     }
 
@@ -95,10 +99,13 @@ final class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
             }
             case "initialize": {
                 if (camera != null) {
+                    formatImageGroup = call.argument("imageFormatGroup");
                     try {
                         camera.open(call.argument("imageFormatGroup"));
                         result.success(null);
                     } catch (Exception e) {
+                        camera = null;
+                        Log.d("CANT", "onMethodCall: " + e.getMessage());
                         handleException(e, result);
                     }
                 } else {
@@ -247,11 +254,43 @@ final class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
                 }
                 break;
             }
+            case "availabilityStream": {
+                try {
+                    camera.checkAvailabilityStream(cameraAvailabilityStream);
+                    result.success(null);
+                } catch (Exception e) {
+                    handleException(e, result);
+                }
+                break;
+            }
+            case "isCameraAvailable": {
+                try {
+                    Log.d("MAX", "onMethodCall: " + camera.getMaxZoomLevel());
+                    result.success(true);
+                }catch(Exception e){
+                    result.success(false);
+                    Log.d("ERROR", "onMethodCall: " + e.getMessage());
+                }
+                break;
+            }
             case "stopImageStream": {
                 try {
                     camera.startPreview();
                     result.success(null);
                 } catch (Exception e) {
+                    Log.d("CAMERA EXCEPTION", e.getMessage());
+                    handleException(e, result);
+                }
+                break;
+            }
+            case "destroyCamera": {
+                try {
+                    camera.stopBackgroundThread();
+                    camera.close();
+                    camera = null;
+                    result.success(null);
+                } catch (Exception e) {
+                    Log.d("CAMERA EXCEPTION", e.getMessage());
                     handleException(e, result);
                 }
                 break;

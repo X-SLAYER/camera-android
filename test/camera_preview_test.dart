@@ -117,6 +117,22 @@ class FakeController extends ValueNotifier<CameraValue>
 
   @override
   Future<void> resumePreview() async {}
+
+  @override
+  Future<void> startAvailabilityStream(OnCameraAvailable check) async {}
+
+  @override
+  Future<void> stopAvailabilityStream() async {}
+
+  @override
+  Future<bool> isCameraAvailable() async {
+    return false;
+  }
+
+  @override
+  Future<void> destroyCamera() {
+    throw UnimplementedError();
+  }
 }
 
 void main() {
